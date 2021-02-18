@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+@import "_variable";
+@import "_mixin";
+
+.body__container {
+  background: $background;
+  position: relative;
+  #photo-and-video {
+    nav {
+      box-sizing: border-box;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      right: 0;
+      color: $white;
+      padding: 20px 0;
+      text-transform: uppercase;
+      h1 {
+        font-size: $M-font;
+        font-weight: $L-weight;
+        text-align: center;
+        margin-bottom: 15px;
+        &:hover {
+          cursor: default;
+        }
+      }
+      ul {
+        width: 50%;
+        padding: 0 30px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        font-size: $XS-font;
+        font-weight: $S-weight;
+        letter-spacing: .2em;
+        li {
+          a:hover {
+            color: $gray;
+          }
+        }
+      }
+    }
+    section {
+      display: flex;
+      height: 100vh;
+      .img-container {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          height: 120%;
+          width: 120%;
+          filter: grayscale(100%);
+          transition: filter .5s;
+          cursor: pointer;
+          &:hover {
+              filter: none;
+          }
+        }
+      }
+    }
+  }
+}
