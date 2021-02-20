@@ -39,17 +39,40 @@
           }
         }
       }
+      button {
+        display: none;
+        border: none;
+        outline: none;
+        background: none;
+        color: $white;
+        font-size: 3em;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top:75%;
+        left: 50px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
     section {
       display: flex;
       height: 100vh;
-      .img-container {
+      .camera-container,
+      .video-container {
         width: 50%;
         height: 100%;
         overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: all 2s;
+        &.view {
+          width: 100%;
+        }
+        &.hide {
+          width: 0;
+        }
         img {
           height: 120%;
           width: 120%;
