@@ -7,7 +7,6 @@ const imgs = document.getElementsByClassName('my-work-imgs');
 window.onload = function() {
   for (let i = 0; i < viewSection.length; i++) {
     viewSection[i].addEventListener('mousewheel', wheelHandler);
-    menuLink[i].addEventListener('click', clickHandler);
   }
   for(let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', workClick);
@@ -22,41 +21,23 @@ function propFunc(e) {
 }
 
 function wheelHandler(e) {
-  function controllUp(i) {
-    viewSection[i].classList.add('scroll-up');
-    viewSection[i].classList.remove('scroll-down');
-  }
-  function controllDown(i) {
-    viewSection[i-1].classList.remove('scroll-up');
-    viewSection[i-1].classList.add('scroll-down');
-  }
+  e.preventDefault();
   if (e.deltaY === 100) {
     if (e.currentTarget === viewSection[0]) {
-      controllUp(0);
+      window.scrollTo(0, viewSection[1].offsetTop);
     } else if (e.currentTarget === viewSection[1]) {
-      controllUp(1);
+      window.scrollTo(0, viewSection[2].offsetTop);
     }
   } else if (e.deltaY === -100) {
     if (e.currentTarget === viewSection[2]) {
-      controllDown(2);
+      window.scrollTo(0, viewSection[1].offsetTop);
     } else if (e.currentTarget === viewSection[1]) {
-      controllDown(1);
+      window.scrollTo(0, viewSection[0].offsetTop);
     }
   }
 }
 
-function clickHandler(e) {
-  const target = e.target;
-  if (target === menuLink[0]) {
-    console.log(target);
-  } else if (target === menuLink[1]) {
-    console.log(target);
-  } else if (target === menuLink[2]) {
-    console.log(target);
-  }
- }
- 
- function workClick(e) {
+function workClick(e) {
   function clickFunc(x,y,z) {
     imgs[x].classList.add('display-on');
     imgs[y].classList.remove('display-on');
@@ -76,3 +57,4 @@ function clickHandler(e) {
     clickFunc(2,0,1);
   }
 }
+ 
