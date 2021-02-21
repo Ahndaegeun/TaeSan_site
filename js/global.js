@@ -1,106 +1,80 @@
+//EVENT VARIABLE
+const bodyContainer = document.getElementsByClassName('body__container')[0];
 const viewSection = document.getElementsByClassName('section');
-const menuLink = document.getElementsByTagName('a');
 const workContainer = document.getElementsByClassName('work-container')[0];
-const buttons = document.getElementsByClassName('btn');
-const imgs = document.getElementsByClassName('my-work-imgs');
-
 const cameraContainer = document.getElementsByClassName('camera-container')[0];
 const videoContainer = document.getElementsByClassName('video-container')[0];
+const imgs = document.getElementsByClassName('my-work-imgs');
 const cameraImg = document.getElementsByClassName('camera-img')[0];
 const videoImg = document.getElementsByClassName('video-img')[0];
-
+const hiddenCamera = document.getElementsByClassName('hidden-camera')[0];
+const hiddenVideo = document.getElementsByClassName('hidden-video')[0];
 const mainMenu = document.getElementsByTagName('nav')[0];
+const menuLink = document.getElementsByTagName('a');
+const buttons = document.getElementsByClassName('btn');
 const menuH1 = document.getElementsByTagName('h1')[0];
 const menuUl = document.getElementsByTagName('ul')[0];
 const menuBtn = document.getElementsByTagName('button')[0];
+const clickedImg = document.getElementsByClassName('hidden-img');
 
+//MOUSE MOVE VARIABLE
 let x = 0;
 let y = 0;
 let mx = 0;
 let my = 0;
 const speed = .1;
 
+//ONLOAD
 window.onload = function() {
+  //STYLE
+  buttons[0].style.borderBottom = '1px solid #a8a0a0';
+
+  //MOUSE MOVE
+  cameraContainer.addEventListener('mousemove', moveFunc);
+  videoContainer.addEventListener('mousemove', moveFunc);
+  loop();
+
+  //MOUSE WHEEL
   for (let i = 0; i < viewSection.length; i++) {
     viewSection[i].addEventListener('mousewheel', wheelHandler);
   }
-  for(let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', workClick);
-  }
+  hiddenCamera.addEventListener('mousewheel', propFunc);
+  hiddenVideo.addEventListener('mousewheel', propFunc);
   workContainer.addEventListener('mousewheel', propFunc);
-  cameraContainer.addEventListener('mousemove', moveFunc);
-  videoContainer.addEventListener('mousemove', moveFunc);
-  cameraContainer.addEventListener('click', imgClick);
-  videoContainer.addEventListener('click', imgClick);
-  menuBtn.addEventListener('click', prevClick);
-  loop();
 
+  //MOUSE CLICK
   for(let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', workClick);
   }
-  
-  buttons[0].style.borderBottom = '1px solid #a8a0a0';
-
+  for(let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', workClick);
+  }
   cameraContainer.addEventListener('click', imgClick);
   videoContainer.addEventListener('click', imgClick);
   menuBtn.addEventListener('click', prevClick);
 
-  function imgClick(e) {
-    const target = e.target.classList[0];
-    if (target === 'camera-img') {
-      cameraContainer.classList.add('view');
-      videoContainer.classList.add('hide');
-    } else if (target === 'video-img') {
-      videoContainer.classList.add('view');
-      cameraContainer.classList.add('hide');
-    }
-    function displayFunc() {
-      cameraContainer.style.display = 'none';
-      videoContainer.style.display = 'none';
-    }
-    function opacityFunc() {
-      cameraContainer.style.opacity = '0';
-      videoContainer.style.opacity = '0';
-    }
-
-    setTimeout(displayFunc, 3000);
-    setTimeout(opacityFunc, 1000);
-
-    menuH1.style.display = 'none';
-    menuUl.style.display = 'none';
-    menuBtn.style.display = 'block';
-  }
-
-  function prevClick(e) {
-    if (cameraContainer.classList[1] === 'view') {
-      function displayFunc() {
-        cameraContainer.classList.remove('view');
-        videoContainer.classList.remove('hide');
-      }
-    } else if (videoContainer.classList[1] === 'view') {
-      function displayFunc() {
-        videoContainer.classList.remove('view');
-        cameraContainer.classList.remove('hide');
-      }
-    }
-    function opacityFunc() {
-      cameraContainer.style.opacity = '1';
-      videoContainer.style.opacity = '1';
-    }
-    cameraContainer.style.display = '';
-    videoContainer.style.display = '';
-
-    setTimeout(opacityFunc, 100);
-    setTimeout(displayFunc, 500);
-
-    menuH1.style.display = '';
-    menuUl.style.display = 'grid';
-    menuBtn.style.display = '';
+  //IMG CLICK
+  for (let i = 0; i < clickedImg.length; i++) {
+    clickedImg[i].addEventListener('click', mainImgClick);
   }
 }
 
-function propFunc(e) {
-  e.stopPropagation();
+//EVENT FUNCTION
+function moveFunc(e) {
+  x = e.clientX;
+  y = e.clientY;
+  target = e.target.classList[0];
+  if (target === 'camera-img') {
+    cameraImg.style.transform = `translate(${mx/50}px, ${my/50}px)`;
+  } else if (target === 'video-img') {
+    videoImg.style.transform = `translate(${mx/50}px, ${my/50}px)`;
+  }
+}
+
+function loop() {
+  mx += (x - mx) * speed;
+  my += (y - my) * speed;
+  window.requestAnimationFrame(loop);
 }
 
 function wheelHandler(e) {
@@ -120,6 +94,10 @@ function wheelHandler(e) {
   }
 }
 
+function propFunc(e) {
+  e.stopPropagation();
+}
+
 function workClick(e) {
   function clickFunc(x,y,z) {
     imgs[x].classList.add('display-on');
@@ -140,34 +118,32 @@ function workClick(e) {
     clickFunc(2,0,1);
   }
 }
- 
-function moveFunc(e) {
-  x = e.clientX;
-  y = e.clientY;
-  target = e.target.classList[0];
-  if (target === 'camera-img') {
-    cameraImg.style.transform = `translate(${mx/50}px, ${my/50}px)`;
-  } else if (target === 'video-img') {
-    videoImg.style.transform = `translate(${mx/50}px, ${my/50}px)`;
-  }
-}
 
 function imgClick(e) {
   const target = e.target.classList[0];
+  cameraContainer.removeEventListener('click', imgClick);
+  videoContainer.removeEventListener('click', imgClick);
+  cameraImg.style.transform = `translate(0, 0)`;
+  videoImg.style.transform = `translate(0, 0)`;
   if (target === 'camera-img') {
-    cameraContainer.removeEventListener('mousemove', moveFunc);
-    cameraImg.style.transform = ``;
     cameraContainer.classList.add('view');
     videoContainer.classList.add('hide');
+    hiddenCamera.classList.add('on');
+    hiddenVideo.classList.add('off');
+    hiddenCamera.classList.remove('off');
+    hiddenVideo.classList.remove('on');
   } else if (target === 'video-img') {
-    videoContainer.removeEventListener('mousemove', moveFunc);
-    videoImg.style.transform = ``;
     videoContainer.classList.add('view');
     cameraContainer.classList.add('hide');
+    hiddenCamera.classList.add('off');
+    hiddenVideo.classList.add('on');
+    hiddenCamera.classList.remove('on');
+    hiddenVideo.classList.remove('off');
   }
   function displayFunc() {
     cameraContainer.style.display = 'none';
     videoContainer.style.display = 'none';
+    viewSection[0].style.display = 'none';
   }
   function opacityFunc() {
     cameraContainer.style.opacity = '0';
@@ -180,24 +156,23 @@ function imgClick(e) {
   menuH1.style.display = 'none';
   menuUl.style.display = 'none';
   menuBtn.style.display = 'block';
+
+  viewSection[1].style.display = 'none';
+  viewSection[2].style.display = 'none';
 }
 
 function prevClick(e) {
+  cameraContainer.addEventListener('click', imgClick);
+  videoContainer.addEventListener('click', imgClick);
   if (cameraContainer.classList[1] === 'view') {
     function displayFunc() {
       cameraContainer.classList.remove('view');
       videoContainer.classList.remove('hide');
     }
-    function addEvent() {
-      cameraContainer.addEventListener('mousemove', moveFunc);
-    }
   } else if (videoContainer.classList[1] === 'view') {
     function displayFunc() {
       videoContainer.classList.remove('view');
       cameraContainer.classList.remove('hide');
-    }
-    function addEvent() {
-      videoContainer.addEventListener('mousemove', moveFunc);
     }
   }
   function opacityFunc() {
@@ -206,39 +181,42 @@ function prevClick(e) {
   }
   cameraContainer.style.display = '';
   videoContainer.style.display = '';
-  
-  setTimeout(addEvent, 2500);
+  viewSection[0].style.display = '';
+
   setTimeout(opacityFunc, 100);
   setTimeout(displayFunc, 500);
 
   menuH1.style.display = '';
   menuUl.style.display = 'grid';
   menuBtn.style.display = '';
+
+  viewSection[1].style.display = '';
+  viewSection[2].style.display = '';
 }
 
-function loop() {
-    mx += (x - mx) * speed;
-    my += (y - my) * speed;
-    window.requestAnimationFrame(loop);
-}
+function mainImgClick(e) {
+  const srcValue = e.target.getAttribute('src');
+  const altValue = e.target.getAttribute('alt');
+  const naturalW = e.target.naturalWidth;
+  const naturalH = e.target.naturalHeight;
+  bodyContainer.insertAdjacentHTML('afterbegin', '<div class="zoom-img"><img src="" alt=""></div>');
+  menuBtn.style.display = 'none';
+  
+  const background = document.getElementsByTagName('div')[1];
+  const zoomImg = document.getElementsByClassName('zoom-img')[0];
+  
+  zoomImg.firstChild.setAttribute('src', srcValue);
+  zoomImg.firstChild.setAttribute('alt', altValue);
 
-function workClick(e) {
-  function clickFunc(x,y,z) {
-    imgs[x].classList.add('display-on');
-    imgs[y].classList.remove('display-on');
-    imgs[z].classList.remove('display-on');
-    imgs[y].classList.add('display-none');
-    imgs[z].classList.add('display-none');
+  background.addEventListener('click', closeFunc);
+  zoomImg.firstChild.addEventListener('click', zoomFunc);
 
-    buttons[x].style.borderBottom = '1px solid #a8a0a0';
-    buttons[y].style.borderBottom = '';
-    buttons[z].style.borderBottom = '';
+  function closeFunc(e) {
+    bodyContainer.removeChild(zoomImg);
+    menuBtn.style.display = 'block';
   }
-  if (e.target === buttons[0]) {
-    clickFunc(0,1,2);
-  } else if (e.target === buttons[1]) {
-    clickFunc(1,2,0);
-  } else if (e.target === buttons[2]) {
-    clickFunc(2,0,1);
+
+  function zoomFunc(e) {
+    e.stopPropagation();
   }
 }
