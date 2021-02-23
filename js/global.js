@@ -14,8 +14,10 @@ const menuLink = document.getElementsByTagName('a');
 const buttons = document.getElementsByClassName('btn');
 const menuH1 = document.getElementsByTagName('h1')[0];
 const menuUl = document.getElementsByTagName('ul')[0];
-const menuBtn = document.getElementsByTagName('button')[0];
+const menuBtn = document.getElementsByClassName('prev-btn')[0];
 const clickedImg = document.getElementsByClassName('hidden-img');
+const openMenu = document.getElementsByClassName('open-menu')[0];
+const closeMenu = document.getElementsByClassName('close-menu')[0];
 
 //MOUSE MOVE VARIABLE
 let x = 0;
@@ -52,6 +54,8 @@ window.onload = function() {
   cameraContainer.addEventListener('click', imgClick);
   videoContainer.addEventListener('click', imgClick);
   menuBtn.addEventListener('click', prevClick);
+  openMenu.addEventListener('click', onpenMenuClick);
+  closeMenu.addEventListener('click', closeMenuClick);
 
   //IMG CLICK
   for (let i = 0; i < clickedImg.length; i++) {
@@ -121,8 +125,8 @@ function workClick(e) {
 
 function imgClick(e) {
   const target = e.target.classList[0];
-  cameraContainer.removeEventListener('click', imgClick);
-  videoContainer.removeEventListener('click', imgClick);
+  cameraContainer.removeEventListener('mousemove', moveFunc);
+  videoContainer.removeEventListener('mousemove', moveFunc);
   cameraImg.style.transform = `translate(0, 0)`;
   videoImg.style.transform = `translate(0, 0)`;
   if (target === 'camera-img') {
@@ -187,7 +191,11 @@ function prevClick(e) {
   setTimeout(displayFunc, 500);
 
   menuH1.style.display = '';
-  menuUl.style.display = 'grid';
+  if (window.innerWidth > 400) {
+    menuUl.style.display = 'grid';
+  } else {
+    menuUl.style.display = 'flex';
+  }
   menuBtn.style.display = '';
 
   viewSection[1].style.display = '';
@@ -219,4 +227,16 @@ function mainImgClick(e) {
   function zoomFunc(e) {
     e.stopPropagation();
   }
+}
+
+function onpenMenuClick(e) {
+  menuUl.style.display = 'flex';
+  openMenu.style.display = 'none';
+  closeMenu.style.display = 'block';
+}
+
+function  closeMenuClick(e) {
+  menuUl.style.display = 'none';
+  openMenu.style.display = 'block';
+  closeMenu.style.display = 'none';
 }

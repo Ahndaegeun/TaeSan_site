@@ -1,0 +1,119 @@
+@import "_variable";
+
+.body__container {
+  width: 100vw;
+  #photo-and-video {
+    nav{
+      h1 {
+        margin-bottom: 20px;
+        font-size: $S-font;
+      }
+      .open-menu {
+        display: block;
+        color: $white;
+      }
+      .close-menu {
+        color: $white;
+      }
+      ul {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: 100vh;
+        padding: 150px 30px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-end;
+        background: rgba($color: #000000, $alpha: .8);
+        
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    section {
+      .camera-container,
+      .video-container {
+        img {
+          width: 200%;
+          filter: none;
+        }
+      }
+    }
+  }
+  main {
+    .hidden-camera,
+    .hidden-video {
+      .img-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    #my-work {
+      padding: 0 50px;
+      .work-header {
+        h2 {
+          font-size: 18px;
+        }
+        .btn-group {
+          button {
+            font-size: 14px;
+          }
+        }
+      }
+      .work-container {
+        .my-work-imgs {
+          ul {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      }
+    }
+    #connect {
+      flex-direction: column;
+      .profile-container {
+        width: 80%;
+        margin-right: 30px;
+        text-indent: 0;
+        height: 30%;
+        margin: 0 0 20px 0;
+        &:hover {
+          .profile-img {
+            filter: blur(1.5px);
+          }
+        }
+        .profile-img {
+          filter: blur(1.5px);
+        }
+        .description {
+          top: 15px;
+          left: 10px;
+          ul {
+            margin-bottom: 10px;
+            li {
+              &:first-child {
+                font-size: $M-font;
+                margin-bottom: 5px;
+              }
+              &:last-child {
+                font-size: $XS-font;
+              }
+            }
+          }
+        }
+      }
+      .send-container {
+        width: 80%;
+        height: 40%;
+        h3 {
+          font-size: $S-font;
+        }
+        form {
+          * {
+            font-size: $XS-font;
+          }
+        }
+      }
+    }
+  }
+}

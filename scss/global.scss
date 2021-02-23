@@ -59,6 +59,30 @@
           cursor: default;
         }
       }
+      .open-menu {
+        display: none;
+        position: fixed;
+        top: 35px;
+        right: 5px;
+        border: none;
+        background: none;
+        outline: none;
+        font-size: 2em;
+        transform: translate(-50%, -50%);
+        z-index: 11;
+      }
+      .close-menu {
+        display: none;
+        position: fixed;
+        top: 35px;
+        right: 5px;
+        border: none;
+        background: none;
+        outline: none;
+        font-size: 2em;
+        transform: translate(-50%, -50%);
+        z-index: 11;
+      }
       ul {
         width: 50%;
         padding: 0 30px;
@@ -73,7 +97,7 @@
           }
         }
       }
-      button {
+      .prev-btn {
         display: none;
         border: none;
         outline: none;
@@ -121,7 +145,6 @@
     }
   }
   main {
-    
     .hidden-camera,
     .hidden-video {
       &.on {
@@ -224,13 +247,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 30px;
       .profile-container {
         border-radius: 10px;
         position: relative;
         overflow: hidden;
         width: 20%;
         height: 60vh;
+        margin-right: 50px;
         text-indent: -250px;
         transition: all .5s;
         &:hover {

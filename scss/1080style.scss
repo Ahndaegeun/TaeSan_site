@@ -1,0 +1,31 @@
+@import '_variable';
+
+.body__container {
+  width: 1080px;
+  #photo-and-video {
+    nav{
+      h1 {
+        margin-bottom: 20px;
+      }
+      ul {
+        width: 70%;
+      }
+    }
+  }
+  main {
+    .hidden-camera,
+    .hidden-video {
+      .img-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    #my-work {
+      padding: 0 100px;
+    }
+    #connect {
+      .profile-container {
+        width: 30%;
+      }
+    }
+  }
+}

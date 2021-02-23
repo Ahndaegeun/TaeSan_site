@@ -8,7 +8,7 @@
   <meta name="description" content="">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 
   <!-- og -->
   <meta property="og:type" content="website">
@@ -30,6 +30,9 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" media="(max-width: 1080px)" href="./css/1080style.css">
+  <link rel="stylesheet" media="(max-width: 768px)" href="./css/768style.css">
+  <link rel="stylesheet" media="(max-width: 400px)" href="./css/400style.css">
 
   <!-- favicon -->
   <link rel="icon" href="./favicon.png">
@@ -40,12 +43,14 @@
   <header id="photo-and-video">
     <nav>
       <h1>space, empathy</h1>
+      <button class="open-menu"><i class="fa fa-bars"></i></button>
+      <button class="close-menu"><i class="fa fa-close"></i></button>
       <ul>
         <li><a href="#photo-and-video">Photo&nbsp;and&nbsp;Video</a></li>
         <li><a href="#my-work">My&nbsp;Work</a></li>
         <li><a href="#connect">Connect</a></li>
       </ul>
-      <button type="button"><i class="fa fa-angle-left"></i></button>
+      <button class="prev-btn" type="button"><i class="fa fa-angle-left"></i></button>
     </nav>
     <section class="section home-section">
       <div class="camera-container"><img class="camera-img" src="./images/header-camera.jpg" alt="Camera"></div>
@@ -175,7 +180,7 @@
           <input type="email" placeholder="Your Email Address">
           <input type="text" placeholder="Your Name">
           <input type="phone" placeholder="Yout Phone Number">
-          <textarea cols="30" rows="10" placeholder="Contents"></textarea>
+          <textarea cols="30" rows="8" placeholder="Contents"></textarea>
           <button type="submit">Send</button>
         </form>
       </div>
