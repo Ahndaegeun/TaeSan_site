@@ -56,6 +56,9 @@ window.onload = function() {
   menuBtn.addEventListener('click', prevClick);
   openMenu.addEventListener('click', onpenMenuClick);
   closeMenu.addEventListener('click', closeMenuClick);
+  for (let i = 0; i < menuLink.length; i++) {
+    menuLink[i].addEventListener('click', linkClick);
+  }
 
   //IMG CLICK
   for (let i = 0; i < clickedImg.length; i++) {
@@ -166,8 +169,8 @@ function imgClick(e) {
 }
 
 function prevClick(e) {
-  cameraContainer.addEventListener('click', imgClick);
-  videoContainer.addEventListener('click', imgClick);
+  cameraContainer.addEventListener('mousemove', moveFunc);
+  videoContainer.addEventListener('mousemove', moveFunc);
   if (cameraContainer.classList[1] === 'view') {
     function displayFunc() {
       cameraContainer.classList.remove('view');
@@ -194,7 +197,7 @@ function prevClick(e) {
   if (window.innerWidth > 400) {
     menuUl.style.display = 'grid';
   } else {
-    menuUl.style.display = 'flex';
+    menuUl.style.display = 'none';
   }
   menuBtn.style.display = '';
 
@@ -236,6 +239,12 @@ function onpenMenuClick(e) {
 }
 
 function  closeMenuClick(e) {
+  menuUl.style.display = 'none';
+  openMenu.style.display = 'block';
+  closeMenu.style.display = 'none';
+}
+
+function linkClick(e) {
   menuUl.style.display = 'none';
   openMenu.style.display = 'block';
   closeMenu.style.display = 'none';
