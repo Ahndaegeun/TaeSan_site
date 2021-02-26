@@ -64,6 +64,9 @@ window.onload = function() {
   for (let i = 0; i < clickedImg.length; i++) {
     clickedImg[i].addEventListener('click', mainImgClick);
   }
+
+  //RESIZE
+  window.addEventListener('resize', resizeFunc)
 }
 
 //EVENT FUNCTION
@@ -245,7 +248,21 @@ function  closeMenuClick(e) {
 }
 
 function linkClick(e) {
-  menuUl.style.display = 'none';
-  openMenu.style.display = 'block';
-  closeMenu.style.display = 'none';
+  if (window.innerWidth < 400) {
+    menuUl.style.display = 'none';
+    openMenu.style.display = 'block';
+    closeMenu.style.display = 'none';
+  }
+}
+
+function resizeFunc(e) {
+  if(window.innerWidth > 400) {
+    openMenu.style.display = 'none';
+    closeMenu.style.display = 'none';
+    menuUl.style.display = 'grid';
+  } else {
+    openMenu.style.display = 'block';
+    closeMenu.style.display = 'none';
+    menuUl.style.display = 'none';
+  }
 }
