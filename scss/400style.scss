@@ -5,28 +5,31 @@
   #photo-and-video {
     nav{
       h1 {
-        margin-bottom: 20px;
-        font-size: $S-font;
+        margin-bottom: 0;
+        margin-left: 10px;
+        font-size: 1.2em;
+        text-align: left;
       }
       .open-menu {
         display: block;
         color: $white;
+        right: -20px;
       }
       .close-menu {
         color: $white;
+        right: -20px;
       }
       ul {
         position: absolute;
         top: 0;
         right: 0;
-        width: 70%;
+        width: 260px;
         height: 100vh;
         padding: 150px 30px;
         display: none;
         flex-direction: column;
         align-items: flex-end;
         background: rgba($color: #000000, $alpha: .8);
-        
         li {
           margin-bottom: 10px;
         }

@@ -133,6 +133,8 @@ function imgClick(e) {
   const target = e.target.classList[0];
   cameraContainer.removeEventListener('mousemove', moveFunc);
   videoContainer.removeEventListener('mousemove', moveFunc);
+  cameraContainer.removeEventListener('click', imgClick);
+  videoContainer.removeEventListener('click', imgClick);
   cameraImg.style.transform = `translate(0, 0)`;
   videoImg.style.transform = `translate(0, 0)`;
   if (target === 'camera-img') {
@@ -154,6 +156,7 @@ function imgClick(e) {
     cameraContainer.style.display = 'none';
     videoContainer.style.display = 'none';
     viewSection[0].style.display = 'none';
+    menuBtn.style.display = 'block';
   }
   function opacityFunc() {
     cameraContainer.style.opacity = '0';
@@ -165,15 +168,12 @@ function imgClick(e) {
 
   menuH1.style.display = 'none';
   menuUl.style.display = 'none';
-  menuBtn.style.display = 'block';
 
   viewSection[1].style.display = 'none';
   viewSection[2].style.display = 'none';
 }
 
 function prevClick(e) {
-  cameraContainer.addEventListener('mousemove', moveFunc);
-  videoContainer.addEventListener('mousemove', moveFunc);
   if (cameraContainer.classList[1] === 'view') {
     function displayFunc() {
       cameraContainer.classList.remove('view');
@@ -189,21 +189,27 @@ function prevClick(e) {
     cameraContainer.style.opacity = '1';
     videoContainer.style.opacity = '1';
   }
+  function addEvent() {
+    cameraContainer.addEventListener('mousemove', moveFunc);
+    videoContainer.addEventListener('mousemove', moveFunc);
+    cameraContainer.addEventListener('click', imgClick);
+    videoContainer.addEventListener('click', imgClick);
+    menuH1.style.display = '';
+    if (window.innerWidth > 400) {
+      menuUl.style.display = 'grid';
+    } else {
+      menuUl.style.display = 'none';
+    }
+  }
   cameraContainer.style.display = '';
   videoContainer.style.display = '';
   viewSection[0].style.display = '';
-
+  
   setTimeout(opacityFunc, 100);
   setTimeout(displayFunc, 500);
-
-  menuH1.style.display = '';
-  if (window.innerWidth > 400) {
-    menuUl.style.display = 'grid';
-  } else {
-    menuUl.style.display = 'none';
-  }
+  setTimeout(addEvent, 3000);
+  
   menuBtn.style.display = '';
-
   viewSection[1].style.display = '';
   viewSection[2].style.display = '';
 }

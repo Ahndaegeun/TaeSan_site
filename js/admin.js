@@ -13,9 +13,34 @@ const workBtnGroup = document.getElementsByClassName('btn-group')[2];
 const volunteerSection = document.getElementsByClassName('volunteer-item-container')[0];
 const travelSection = document.getElementsByClassName('travel-item-container')[0];
 const dailySection = document.getElementsByClassName('daily-item-container')[0];
-const allCheck = document.getElementsByClassName('check-all');
-const listItemCheck = document.getElementsByClassName('list-item');
-const modifySection = document.getElementsByClassName('modify');
+const photoCheckBoxAll = document.getElementsByName('photo')[0];
+const photoCheckBoxItem = document.getElementsByName('photo-item');
+const videoCheckBoxAll = document.getElementsByName('video')[0];
+const videoCheckBoxItem = document.getElementsByName('video-item');
+const volunteerCheckBoxAll = document.getElementsByName('volunteer')[0];
+const volunteerCheckBoxItem = document.getElementsByName('volunteer-item');
+const travelCheckBoxAll = document.getElementsByName('travel')[0];
+const travelCheckBoxItem = document.getElementsByName('travel-item');
+const dailyCheckBoxAll = document.getElementsByName('daily')[0];
+const dailyCheckBoxItem = document.getElementsByName('daily-item');
+const VolunteerBtn = document.getElementsByClassName('volunteer')[0];
+const travelBtn = document.getElementsByClassName('travel')[0];
+const dailyBtn = document.getElementsByClassName('daily')[0];
+const volunteerHead = document.getElementsByClassName('volunteer-head')[0];
+const travelHead = document.getElementsByClassName('travel-head')[0];
+const dailyHead = document.getElementsByClassName('daily-head')[0];
+const volunteerView = document.getElementsByClassName('volunteer-view')[0];
+const travelView = document.getElementsByClassName('travel-view')[0];
+const dailyView = document.getElementsByClassName('daily-view')[0];
+const mailListItem = document.getElementsByClassName('mail-list-item');
+
+const listTitle = document.getElementsByClassName('list-title');
+const listImg = document.getElementsByClassName('list-img');
+const listVideo = document.getElementsByClassName('list-video');
+
+const previewImg = document.getElementsByClassName('preview-img');
+const modifyTitle = document.getElementsByClassName('modify-title');
+const modifySrc = document.getElementsByClassName('modify-src');
 
 window.onload = function () {
   //MAIN MENU
@@ -32,9 +57,29 @@ window.onload = function () {
     }
   }
 
+  //WORK BTN SELEC
+  VolunteerBtn.addEventListener('click', btnFunc);
+  travelBtn.addEventListener('click', btnFunc);
+  dailyBtn.addEventListener('click', btnFunc);
+
   //CHECK BOX
-  for(let i = 0; i < allCheck.length; i++) {
-    allCheck[i].addEventListener('click', allCheckFunc);
+  photoCheckBoxAll.addEventListener('click', checkAllPhotoFunc);
+  videoCheckBoxAll.addEventListener('click', checkAllVideoFunc);
+  volunteerCheckBoxAll.addEventListener('click', checkAllVolunteerFunc);
+  travelCheckBoxAll.addEventListener('click', checkAllTravelFunc);
+  dailyCheckBoxAll.addEventListener('click', checkAllDailyFunc);
+
+  //MAIL SELECT
+  for(let i = 0; i < mailListItem.length; i++) {
+    mailListItem[i].addEventListener('click', mailClickFunc,true);
+  }
+
+  //IMG PREVIEW
+  for(let i = 0; i < listImg.length; i++) {
+    listImg[i].parentNode.addEventListener('click', previewImgFunc);
+  }
+  for(let i = 0; i < listVideo.length; i++) {
+    listVideo[i].parentNode.addEventListener('click', previewImgFunc);
   }
 }
 
@@ -93,49 +138,121 @@ function workClickFunc(e) {
   }
 }
 
-function allCheckFunc(e) {
-  const check = e.target.checked;
-  function maiSselector(x) {
-    if (check === true) {
-      for (let i = 0; i < modifySection[x].childNodes[1].childNodes[3].childNodes.length; i++) {
-        if (i%2 === 1) {
-          modifySection[x].childNodes[1].childNodes[3].childNodes[i].childNodes[1].childNodes[0].checked = true;
-        }
-      }
-    } else if (check === false) {
-      for (let i = 0; i < modifySection[x].childNodes[1].childNodes[3].childNodes.length; i++) {
-        if (i%2 === 1) {
-          modifySection[x].childNodes[1].childNodes[3].childNodes[i].childNodes[1].childNodes[0].checked = false;
-        }
-      }
+function checkAllPhotoFunc(e) {
+  if (photoCheckBoxAll.checked === true) {
+    for(let i = 0; i < photoCheckBoxItem.length; i++) {
+      photoCheckBoxItem[i].checked = true;
+    }
+  } else {
+    for(let i = 0; i < photoCheckBoxItem.length; i++) {
+      photoCheckBoxItem[i].checked = false;
     }
   }
-  function subSelector(x) {
-    if (check === true) {
-      for (let i = 0; i < modifySection[x].childNodes.length; i++) {
-        if (i%2 === 1) {
-          modifySection[x].childNodes[i].childNodes[1].childNodes[0].checked = true;
-        }
-      }
-    } else if (check === false) {
-      for (let i = 0; i < modifySection[x].childNodes.length; i++) {
-        if (i%2 === 1) {
-          modifySection[x].childNodes[i].childNodes[1].childNodes[0].checked = false;
-        }
-      }
-    }
-  }
-  
+}
 
-  if (!(modifySection[0].classList.contains('off'))) {
-    maiSselector(0);
-  } else if (!(modifySection[1].classList.contains('off')) ){
-    maiSselector(1);
-  } else if (!(modifySection[3].classList.contains('off'))) {
-    subSelector(3);
-  } else if (!(modifySection[4].classList.contains('off'))) {
-    subSelector(4);
-  } else if (!(modifySection[5].classList.contains('off'))) {
-    subSelector(5);
+function checkAllVideoFunc(e) {
+  if (videoCheckBoxAll.checked === true) {
+    for(let i = 0; i < videoCheckBoxItem.length; i++) {
+      videoCheckBoxItem[i].checked = true;
+    }
+  } else {
+    for(let i = 0; i < videoCheckBoxItem.length; i++) {
+      videoCheckBoxItem[i].checked = false;
+    }
+  }
+}
+
+function checkAllVolunteerFunc(e) {
+  if (volunteerCheckBoxAll.checked === true) {
+    for(let i = 0; i < volunteerCheckBoxItem.length; i++) {
+      volunteerCheckBoxItem[i].checked = true;
+    }
+  } else {
+    for(let i = 0; i < volunteerCheckBoxItem.length; i++) {
+      volunteerCheckBoxItem[i].checked = false;
+    }
+  }
+}
+
+function checkAllTravelFunc(e) {
+  if (travelCheckBoxAll.checked === true) {
+    for(let i = 0; i < travelCheckBoxItem.length; i++) {
+      travelCheckBoxItem[i].checked = true;
+    }
+  } else {
+    for(let i = 0; i < travelCheckBoxItem.length; i++) {
+      travelCheckBoxItem[i].checked = false;
+    }
+  }
+}
+
+function checkAllDailyFunc(e) {
+  if (dailyCheckBoxAll.checked === true) {
+    for(let i = 0; i < dailyCheckBoxItem.length; i++) {
+      dailyCheckBoxItem[i].checked = true;
+    }
+  } else {
+    for(let i = 0; i < dailyCheckBoxItem.length; i++) {
+      dailyCheckBoxItem[i].checked = false;
+    }
+  }
+}
+
+function btnFunc(e) {
+  if (e.target === VolunteerBtn) {
+    volunteerHead.classList.remove('off');
+    volunteerView.classList.remove('off');
+    travelHead.classList.add('off');
+    travelView.classList.add('off');
+    dailyHead.classList.add('off');
+    dailyView.classList.add('off');
+  } else if(e.target === travelBtn) {
+    volunteerHead.classList.add('off');
+    volunteerView.classList.add('off');
+    travelHead.classList.remove('off');
+    travelView.classList.remove('off');
+    dailyHead.classList.add('off');
+    dailyView.classList.add('off');
+  } else if(e.target === dailyBtn) {
+    volunteerHead.classList.add('off');
+    volunteerView.classList.add('off');
+    travelHead.classList.add('off');
+    travelView.classList.add('off');
+    dailyHead.classList.remove('off');
+    dailyView.classList.remove('off');
+  }
+}
+
+function mailClickFunc(e) {
+  const target = e.target.parentNode
+  for(let i = 0; i < mailListItem.length; i++) {
+    mailListItem[i].style.background = '';
+  }
+  target.style.background = '#ffffff';
+}
+
+function previewImgFunc(e) {
+  const target = e.target.parentNode.childNodes[5].innerText;
+  const mainParent = e.target.parentNode.parentNode.parentNode.parentNode.classList[0];
+  const parent = e.target.parentNode.parentNode.classList[0]
+  if(mainParent === 'photo') {
+    previewImg[0].setAttribute('src', `./images/${target}`);
+    previewImg[0].setAttribute('alt', target);
+    modifyTitle[0].setAttribute('value', target)
+  } else if (mainParent === 'video') {
+    previewImg[1].setAttribute('src', `./videos/${target}`);
+    modifyTitle[1].setAttribute('value', target)
+  } else if (parent === 'volunteer-item-container') {
+    previewImg[2].setAttribute('src', `./images/${target}`);
+    previewImg[2].setAttribute('alt', target);
+    modifyTitle[2].setAttribute('value', target)
+  } else if (parent === 'travel-item-container') {
+    previewImg[3].setAttribute('src', `./images/${target}`);
+    previewImg[3].setAttribute('alt', target);
+    modifyTitle[3].setAttribute('value', target)
+  } else if (parent === 'daily-item-container') {
+    previewImg[4].setAttribute('src', `./images/${target}`);
+    previewImg[4].setAttribute('alt', target);
+    modifyTitle[4].setAttribute('value', target)
   }
 }

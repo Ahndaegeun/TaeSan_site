@@ -129,7 +129,6 @@
                 justify-content: center;
                 font-size: $S-font;
                 font-weight: $L-weight;
-                text-transform: uppercase;
                 color: $gray;
               }
             }
@@ -145,7 +144,6 @@
           .preview-img {
             width: 100%;
             height: 400px;
-            background: blueviolet;
           }
           .btn-group {
             width: 100%;
@@ -262,7 +260,6 @@
           .preview-img {
             width: 100%;
             height: 400px;
-            background: blueviolet;
           }
           .btn-group {
             width: 100%;
@@ -328,7 +325,7 @@
         .list-item-container {
           border: 1px solid $white;
           height: 680px;
-          .list-item {
+          .mail-list-item {
             display: grid;
             grid-template-columns: 2fr 1fr 1.5fr;
             &:hover {
